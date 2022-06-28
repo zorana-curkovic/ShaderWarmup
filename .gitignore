@@ -62,3 +62,5 @@ crashlytics-build.properties
 .idea/
 
 UserSettings/
+
+.DS_Store

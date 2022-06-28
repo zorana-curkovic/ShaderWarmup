@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class warmup : MonoBehaviour
 {
+    public bool warmupOn;
+    [Range(1,15)]
+    public int warmupAfter;
     public bool debug;
     public Mesh mesh;
     public Shader shader;
@@ -20,9 +23,13 @@ public class warmup : MonoBehaviour
         ShaderWarmupSetup setup = new ShaderWarmupSetup();
         setup.vdecl = vdescriptor;
         
-        yield return new WaitForSeconds(15);
-        field.text = "Warmup - Done";
-        ShaderWarmup.WarmupShader(shader, setup);
+        yield return new WaitForSeconds(warmupAfter);
+        if (warmupOn)
+        {
+            field.text = "Warmup - Done";
+            ShaderWarmup.WarmupShader(shader, setup);
+        }
+
         if (debug)
         {
             Debug.Log("V descriptor =");
