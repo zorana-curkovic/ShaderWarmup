@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 4d9abc99fb5484c04b7dc2a2a95cc4cb
+  - enabled: 1
     path: Assets/Scenes/NewAPIMetalWarmup.unity
     guid: b9dacf220df3c4f3fb10e8d29b11e5c3
+  - enabled: 1
+    path: Assets/Scenes/WarmupManual.unity
+    guid: 06022820fa04a4563ba6fcf91f91699e
   m_configObjects: {}

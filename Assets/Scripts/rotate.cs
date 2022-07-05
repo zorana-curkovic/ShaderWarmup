@@ -9,21 +9,30 @@ public class rotate : MonoBehaviour
     public bool rotX;
     public bool rotY;
     public bool rotZ;
-    
+
+    private bool rotating;
+
+    public void ToggleRotation()
+    {
+        rotating = !rotating;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        rotating = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 rotation = Vector3.zero;
-        if (rotX) rotation.x += Time.deltaTime * speed;
-        if (rotY) rotation.y += Time.deltaTime * speed;
-        if (rotZ) rotation.z += Time.deltaTime * speed;
+        if (rotating)
+        {
+            Vector3 rotation = Vector3.zero;
+            if (rotX) rotation.x += Time.deltaTime * speed;
+            if (rotY) rotation.y += Time.deltaTime * speed;
+            if (rotZ) rotation.z += Time.deltaTime * speed;
 
-        transform.Rotate(rotation);
+            transform.Rotate(rotation);
+        }
     }
 }
