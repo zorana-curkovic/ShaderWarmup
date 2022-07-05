@@ -469,9 +469,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27bd38ff0428435aa5461e364547283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warmupOn: 1
+  warmupAfter: 5
   WarmupCamera: {fileID: 1348184153}
   field: {fileID: 1957735733}
-  warmupAfter: 5
 --- !u!4 &413187473
 Transform:
   m_ObjectHideFlags: 0
@@ -851,9 +852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d27bd38ff0428435aa5461e364547283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warmupOn: 0
+  warmupAfter: 0
   WarmupCamera: {fileID: 0}
   field: {fileID: 1957735733}
-  warmupAfter: 0
 --- !u!1001 &1830612952
 PrefabInstance:
   m_ObjectHideFlags: 0
