@@ -5,9 +5,8 @@ using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.UIElements;
 
-public class warmup : MonoBehaviour
+public class NewAPIWarmup : MonoBehaviour
 {
-    public bool warmupOn;
     [Range(1,15)]
     public int warmupAfter;
     public bool debug;
@@ -15,8 +14,32 @@ public class warmup : MonoBehaviour
     public Shader shader;
     public TMPro.TMP_Text field;
     private ShaderWarmupSetup setup;
+    private bool warmupOn;
+    private Coroutine warmupCo;
+
+    void OnAwake()
+    {
+        warmupCo = null;
+    }
+    void Start()
+    {
+        
+    }
+
+    public void ToggleWarmup(bool _enabled)
+    {
+        warmupOn = _enabled;
+
+        if (warmupOn && warmupCo == null)
+        {
+            warmupCo = StartCoroutine(WarmupCo());
+            
+        }
     
-    IEnumerator Start()
+    
+    }
+    
+    IEnumerator WarmupCo()
     {
         VertexAttributeDescriptor[] vdescriptor = mesh.GetVertexAttributes();
         
@@ -36,6 +59,8 @@ public class warmup : MonoBehaviour
             for (int i = 0; i < vdescriptor.Length; ++i)
                 Debug.Log(vdescriptor[i].attribute.ToString());
         }
+
+        warmupCo = null;
     }
 
 

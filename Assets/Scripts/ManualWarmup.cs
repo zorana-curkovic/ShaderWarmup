@@ -4,20 +4,39 @@ using UnityEngine;
 
 public class ManualWarmup : MonoBehaviour
 {
-    public bool warmupOn;
     [Range(1,15)]
     public int warmupAfter;
     
     public GameObject WarmupCamera;
     public TMPro.TMP_Text field;
 
+    private bool warmupOn;
+    private Coroutine warmupCo;
     
     void OnAwake()
     {
         WarmupCamera.SetActive(false);
+        warmupCo = null;
+    }
+
+    void Start()
+    {
+        if (warmupOn == true && warmupCo == null)
+            warmupCo = StartCoroutine(WarmupCo());
+    }
+
+    public void ToggleWarmup(bool _enabled)
+    {
+        bool lastState = warmupOn;
+        warmupOn = _enabled;
+
+
+        if (warmupOn == true && warmupCo == null)
+            warmupCo = StartCoroutine(WarmupCo());
+        
     }
     
-    IEnumerator Start()
+    IEnumerator WarmupCo()
     {
         if (warmupOn) {
             
@@ -28,8 +47,8 @@ public class ManualWarmup : MonoBehaviour
             yield return new WaitForEndOfFrame();
             WarmupCamera.SetActive(false);
             field.text = "Warmup - Done";
-        
-        
+
+            warmupCo = null;
         }
     }
 
