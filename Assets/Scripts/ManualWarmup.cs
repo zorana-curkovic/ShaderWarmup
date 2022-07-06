@@ -21,6 +21,7 @@ public class ManualWarmup : MonoBehaviour
 
     void Start()
     {
+        // but warmupOn has to be set up from script
         if (warmupOn == true && warmupCo == null)
             warmupCo = StartCoroutine(WarmupCo());
     }

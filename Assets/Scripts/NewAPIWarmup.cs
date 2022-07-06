@@ -23,7 +23,9 @@ public class NewAPIWarmup : MonoBehaviour
     }
     void Start()
     {
-        
+        // but warmupOn has to be set up from script
+        if (warmupOn == true && warmupCo == null)
+            warmupCo = StartCoroutine(WarmupCo());
     }
 
     public void ToggleWarmup(bool _enabled)
@@ -35,8 +37,6 @@ public class NewAPIWarmup : MonoBehaviour
             warmupCo = StartCoroutine(WarmupCo());
             
         }
-    
-    
     }
     
     IEnumerator WarmupCo()
