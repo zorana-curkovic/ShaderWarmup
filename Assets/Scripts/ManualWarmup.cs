@@ -12,18 +12,23 @@ public class ManualWarmup : MonoBehaviour
 
     private bool warmupOn;
     private Coroutine warmupCo;
-    
-    void OnAwake()
+    private float timeElapsed;
+
+    void Awake()
     {
         WarmupCamera.SetActive(false);
         warmupCo = null;
+        field.text = $"Warmup - {warmupAfter}";
     }
 
     void Start()
     {
         // but warmupOn has to be set up from script
         if (warmupOn == true && warmupCo == null)
+        {
+            timeElapsed = 0;
             warmupCo = StartCoroutine(WarmupCo());
+        }
     }
 
     public void ToggleWarmup(bool _enabled)
@@ -33,24 +38,32 @@ public class ManualWarmup : MonoBehaviour
 
 
         if (warmupOn == true && warmupCo == null)
+        {
+            timeElapsed = 0;
             warmupCo = StartCoroutine(WarmupCo());
-        
+        }
+
     }
     
     IEnumerator WarmupCo()
     {
         if (warmupOn) {
             
-            yield return new WaitForSeconds(warmupAfter);
+            while (timeElapsed < warmupAfter)
+            {
+                field.text = $"Warmup - {warmupAfter - timeElapsed}";
+
+                yield return new WaitForSeconds(1);
+                timeElapsed += 1;
+            }
             WarmupCamera.SetActive(true);
-            
         
             yield return new WaitForEndOfFrame();
             WarmupCamera.SetActive(false);
             field.text = "Warmup - Done";
 
-            warmupCo = null;
         }
+        warmupCo = null;
     }
 
 }
